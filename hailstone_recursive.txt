@@ -1,3 +1,13 @@
+C implementation of Recursive hailstone
+
+int r_hailstone(int n) {
+        if (n == 1) return 0;
+        else if ((n % 2) == 0) return 1 + r_hailstone(n/2);
+        else return 1 + r_hailstone(3*n+1);
+    }
+
+MIPS implementation
+
 Hail: addiu $t2, $0, 0x0001 
        bne $a0, $t2, Recur         #if n == 1, return 
        nop
