@@ -1,0 +1,4 @@
+A hailstone sequence is defined as follows: start at any positive integer n; if n is even, divide it by 2 to get n/2; else triple it and add one to get 3n+1; then repeat with the new number. You will implement the hailstone function, which counts how many steps it takes for the hailstone sequence to converge to 1 from a given starting point. For instance, hailstone(40) returns 8 because the sequence starting at 40 converges in 8 steps: 40, 20, 10, 5, 16, 8, 4, 2, 1. And hailstone(31) returns 106 due to its long and chaotic sequence: 31, 94, 47, 142, 71, 214, ..., 3077, 9232, 4616, 2308, 1154, 577, ..., 53, 160, 80, 40, 20, 10, 5, 16, 8, 4, 2, 1.
+
+
+There are three ways to implement this function: Recursively, iteravely, and iteravely using previously computed answers, all methods are implemnted in MIPS assembly in this repository by Samuel Ocbazghi. 
