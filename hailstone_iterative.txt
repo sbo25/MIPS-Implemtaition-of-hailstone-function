@@ -1,0 +1,21 @@
+addu   $v0, $0, $0
+addiu $t2, $0, 0x0001 
+loop: beq $a0, $t2, end
+nop
+addiu $v0, $v0, 0x0001
+andi  $t3, $a0, 0x0001
+beq  $t3, $0, even
+nop
+addu   $t4, $a0, $a0
+addu   $a0, $t4, $a0
+addiu $a0, $a0, 0x0001
+j loop
+nop
+addiu $v0, $v0, 0x0001
+even: srl $a0, $a0, 0x0001
+j loop
+nop
+addiu $v0, $v0, 0x0001
+end:
+jr $ra
+nop

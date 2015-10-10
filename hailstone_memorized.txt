@@ -1,0 +1,63 @@
+mHail : sltu $t0, $a0, $a2               #if n < s    
+                                   #&& A[n] != 0, return A[n]
+        addu $t2, $a0, $a1
+        sll  $t2, $t2, 0x0002
+        lw  $t1, 0($t2)
+        beq $t1, $0, iszero
+        nop
+        addiu $t1, $0, 0x0001
+        j conditionone
+        nop
+        iszero :addiu $t1, $0, 0x0000
+        conditionone: and $t0, $t0, $t1
+        beq $t0, $0, elseif
+        nop
+        lw  $v0, 0($t2)
+        jr $ra
+        nop
+
+
+elseif: addiu $t5, $0, 0x0001         #if n == 1, return zero
+        bne $a0, $t5, Recur 
+        nop       
+        addiu $v0, $0, 0x0000
+        jr $ra
+        nop
+
+Recur: addiu  $sp, $sp, 0xfff8
+       sw    $ra, 0($sp)
+       sw    $t2, 4($sp)
+       andi  $t3, $a0, 0x0001
+       beq  $t3, $0, even            #if n is even, go to even
+       nop
+       addu   $t0, $a0, $a0          #else, n = 3n+1
+       addu   $a0, $t0, $a0
+       addiu $a0, $a0, 0x0001
+       jal mHail
+       nop
+       j finish
+       nop
+      
+    
+   even: srl $a0, $a0, 0x0001
+       jal mHail
+       nop
+       j finish
+       nop
+
+finish: addiu $v0, $v0, 0x0001
+        lw $ra, 0($sp)
+        lw $t2, 4($sp)
+        addiu $sp, $sp, 0x0008
+ 
+
+    sltu $t0, $a0, $a2
+    beq $t0, $0, nostore
+    nop
+    sw $v0, 0($t2)
+    j endall
+    nop
+
+    nostore:
+    endall: jr $ra
+    nop 

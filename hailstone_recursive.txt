@@ -1,0 +1,32 @@
+Hail: addiu $t2, $0, 0x0001 
+       bne $a0, $t2, Recur         #if n == 1, return 
+       nop
+       lui $v0, 0x0000
+       jr $ra
+       nop
+
+Recur: addiu  $sp, $sp, 0xfffc
+       sw    $ra, 0($sp)
+      andi  $t3, $a0, 0x0001
+      beq  $t3, $t0, even            #if n is even, go to even:
+      nop
+        addu   $t4, $a0, $a0        #else, n = 3n+1
+      addu   $a0, $t4, $a0
+       addiu $a0, $a0, 0x0001
+       jal Hail
+       nop
+       j finish
+       nop
+      
+    
+   even: srl $a0, $a0, 0x0001
+       jal Hail
+       nop
+       j finish
+       nop
+
+finish: addiu $v0, $v0, 0x0001
+      lw $ra, 0($sp)
+        addiu $sp, $sp, 0x0004
+        jr $ra
+        nop
